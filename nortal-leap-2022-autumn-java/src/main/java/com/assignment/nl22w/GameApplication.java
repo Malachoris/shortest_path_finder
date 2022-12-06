@@ -1,8 +1,6 @@
 package com.assignment.nl22w;
 
-import com.assignment.nl22w.game.Game;
 import com.assignment.nl22w.game.impl.GameImpl;
-import com.assignment.nl22w.game.solution.TextFileReader;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -18,9 +16,10 @@ public class GameApplication {
 		ConfigurableApplicationContext context
 				= SpringApplication.run(GameApplication.class, args);
 		try {
-			Resource resource = new DefaultResourceLoader().getResource("classpath:map1.txt");
 			GameImpl runner = context.getBean(GameImpl.class);
-			runner.escapeFromTheWoods(resource);
+			Resource resource = new DefaultResourceLoader().getResource("classpath:map1.txt");
+			int stepsCount = runner.escapeFromTheWoods(resource);
+			System.out.println(stepsCount);
 		} catch (IOException ex){
 			ex.printStackTrace();
 		}

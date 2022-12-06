@@ -1,20 +1,20 @@
 package m.assignment.nl22w;
 
-import com.assignment.nl22w.game.Game;
-import com.assignment.nl22w.game.impl.GameImpl;
+import com.assignment.nl22w.GameApplication;
+import com.assignment.nl22w.game.interfaces.Game;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 
 import java.io.IOException;
 
+@SpringBootTest(classes = GameApplication.class)
 public class TestMaps {
 
-    @Autowired
-    private Game game = new GameImpl();
+    private Game game;
 
     @Test
     public void map1ShouldReturnFour() throws IOException {

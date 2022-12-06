@@ -1,15 +1,11 @@
 package com.assignment.nl22w.game.impl;
 
-import com.assignment.nl22w.game.Game;
-import com.assignment.nl22w.game.solution.ForestBuilder;
-import com.assignment.nl22w.game.solution.ForestPathFinder;
-import com.assignment.nl22w.game.solution.ForestValidator;
-import com.assignment.nl22w.game.solution.TextFileReader;
-import com.assignment.nl22w.game.solution.interfaces.Matrix;
-import com.assignment.nl22w.game.solution.interfaces.PathFinder;
-import com.assignment.nl22w.game.solution.interfaces.Reader;
-import com.assignment.nl22w.game.solution.interfaces.Validator;
-import com.assignment.nl22w.game.solution.models.ForestBlock;
+import com.assignment.nl22w.game.interfaces.Matrix;
+import com.assignment.nl22w.game.interfaces.PathFinder;
+import com.assignment.nl22w.game.interfaces.Reader;
+import com.assignment.nl22w.game.interfaces.Validator;
+import com.assignment.nl22w.game.models.ForestBlock;
+import com.assignment.nl22w.game.interfaces.Game;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -21,6 +17,10 @@ import java.util.List;
 @Component
 @Slf4j
 public class GameImpl implements Game {
+
+	// Calls all objects as services, knows how to validate, create matrix.
+	// Service is like a worker, model is like one object (like a bag)
+	// ENUM is variations of constants with clear naming
 	@Autowired
 	private Validator forestValidator;
 	@Autowired
@@ -30,18 +30,11 @@ public class GameImpl implements Game {
 	@Autowired
 	private PathFinder finder;
 
-	// Here should be dependency injection in the future :)
-	//* DI makes loose coupling of components and moves management of components to containers
-	//* loose coupling makes code more manageable by creating common interface for other classes that uses similar methods
-	//* loose coupling with Spring is another level of loose coupling
-	//* Dependency injection is a pattern we can use to implement Inversion of Control
-	//* “injecting” objects into other objects, is done by an assembler rather than by the objects themselves
-	public GameImpl() {
-		this.forestValidator = new ForestValidator();
-		this.fileReader = new TextFileReader();
-		this.matrix = new ForestBuilder();
-		this.finder = new ForestPathFinder();
-	}
+	// P.S. Dependency Injection makes loose coupling of components and moves management of components to containers
+	// loose coupling makes code more manageable by creating common interface for other classes that uses similar methods
+	// loose coupling with Spring is another level of loose coupling
+	// Dependency injection is a pattern we can use to implement Inversion of Control
+	// “injecting” objects into other objects, is done by an assembler rather than by the objects themselves
 
 	@Override
 	public int escapeFromTheWoods(Resource resource) throws IOException {
